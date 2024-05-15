@@ -21,6 +21,10 @@ export class ProjectsComponent {
     this.projectService.getProjects().subscribe(projects => this.projects = projects);
   }
   
+  delete(project: Project): void {
+    this.projectService.deleteProject(project.id).subscribe(() => this.loadProjects());
+  }
+  
   onSelect(project: Project): void {
     this.selectedProject = project;
   }

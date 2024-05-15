@@ -8,4 +8,9 @@
   </li>
 </ul>
 
+<div *ngIf="selectedProject">
+  <button type="button" title="delete project" (click)="delete(selectedProject)">Delete {{selectedProject.name}}</button>
+</div>
+
+
 <app-project-detail [project]="selectedProject"></app-project-detail>

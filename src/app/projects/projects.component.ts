@@ -24,6 +24,10 @@ export class ProjectsComponent {
   delete(project: Project): void {
     this.projectService.deleteProject(project.id).subscribe(() => this.loadProjects());
   }
+
+  add(name: string): void {
+    this.projectService.insertProject({name} as Project).subscribe(() => this.loadProjects());
+  }
   
   onSelect(project: Project): void {
     this.selectedProject = project;

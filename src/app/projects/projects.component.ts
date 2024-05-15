@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Project } from '../project';
-import { PROJECTS } from '../mock-projects';
 import { ProjectService } from '../project.service';
 
 @Component({

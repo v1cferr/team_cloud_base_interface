@@ -1,0 +1,17 @@
+label {
+    color: #435960;
+    font-weight: bold;
+}
+
+input {
+    font-size: 1em;
+    padding: .5rem;
+}
+
+.update-button {
+    background-color: rgb(225, 211, 194);
+}
+
+.update-button:hover {
+    background-color: rgb(79, 64, 51);
+}

@@ -23,6 +23,7 @@ export class ProjectsComponent {
   
   delete(project: Project): void {
     this.projectService.deleteProject(project.id).subscribe(() => this.loadProjects());
+    this.selectedProject = undefined;
   }
 
   add(name: string): void {

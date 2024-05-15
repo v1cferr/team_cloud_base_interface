@@ -7,10 +7,10 @@
   </button>
 </div>
 
-<h2>My Projects</h2>
+<h2>Projects</h2>
 <ul class="projects">
   <li *ngFor="let project of projects">
-    <button [class.selected]="project === selectedProject" type="button" (click)="onSelect(project)">
+    <button [class.selected]="project.id == selectedProject?.id" type="button" (click)="onSelect(project)">
       <span class="badge">{{project.id}}</span>
       <span class="name">{{project.name}}</span>
     </button>
@@ -18,7 +18,7 @@
 </ul>
 
 <div *ngIf="selectedProject">
-  <button type="button" title="delete project" (click)="delete(selectedProject)">Delete {{selectedProject.name}}</button>
+  <button type="button" class="delete-button" (click)="delete(selectedProject)">Delete {{selectedProject.name}}</button>
 </div>
 
 

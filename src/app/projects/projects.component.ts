@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Project } from '../project';
+import { PROJECTS } from '../mock-projects';
 
 @Component({
   selector: 'app-projects',
@@ -7,8 +8,10 @@ import { Project } from '../project';
   styleUrl: './projects.component.css'
 })
 export class ProjectsComponent {
-  project: Project = {
-    id: 1,
-    name: 'Test'
+  projects = PROJECTS;
+  selectedProject?: Project;
+  
+  onSelect(project: Project): void {
+    this.selectedProject = project;
   }
 }

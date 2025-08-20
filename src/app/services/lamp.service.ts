@@ -105,7 +105,7 @@ export class LampService {
   }
 
   updateLamp(id: number, lamp: { name: string }): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${id}`, lamp, this.httpOptions);
+    return this.http.put(`${this.apiUrl}/${id}/name`, lamp, this.httpOptions);
   }
 
   toggleLamp(id: number): Observable<any> {

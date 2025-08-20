@@ -334,8 +334,26 @@ export class LampsComponent implements OnInit, OnDestroy {
 
   loadLamps(): void {
     this.lampService.getLampsByRoomId(this.roomId).subscribe({
-      next: (lamps) => this.lamps = lamps,
+      next: (lamps) => {
+        this.lamps = this.sortLamps(lamps);
+      },
       error: (error) => console.error('Error loading lamps:', error)
+    });
+  }
+
+  private sortLamps(lamps: Lamp[]): Lamp[] {
+    return lamps.sort((a, b) => {
+      // Lâmpadas LIGADAS primeiro (status true = 1, false = 0)
+      // Depois ordena por nome alfabeticamente
+      const statusA = a.isOn ? 1 : 0;
+      const statusB = b.isOn ? 1 : 0;
+      
+      if (statusB !== statusA) {
+        return statusB - statusA; // Ligadas (1) antes de desligadas (0)
+      }
+      
+      // Se o status for igual, ordena alfabeticamente por nome
+      return a.name.localeCompare(b.name);
     });
   }
 
@@ -348,6 +366,8 @@ export class LampsComponent implements OnInit, OnDestroy {
           const updatedLamp = updatedLamps.find(ul => ul.id === lamp.id);
           return updatedLamp || lamp;
         });
+        // Reordena as lâmpadas após atualização
+        this.lamps = this.sortLamps(this.lamps);
       },
       error: (error) => {
         this.isConnected = false;

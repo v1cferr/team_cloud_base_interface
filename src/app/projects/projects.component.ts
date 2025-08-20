@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Project, CreateProjectRequest } from '../project';
 import { ProjectService } from '../project.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-projects',
@@ -11,7 +12,10 @@ import { ProjectService } from '../project.service';
   imports: [CommonModule, FormsModule],
   template: `
     <div class="container">
-      <h1>🏠 Sistema de Automação Residencial</h1>
+      <div class="header">
+        <h1>🏠 Sistema de Automação Residencial</h1>
+        <button (click)="logout()" class="btn btn-logout">Sair</button>
+      </div>
       
       <!-- Add Project Form -->
       <div class="add-project-form">
@@ -81,11 +85,32 @@ import { ProjectService } from '../project.service';
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
-    h1 {
-      text-align: center;
-      color: #2c3e50;
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       margin-bottom: 30px;
+    }
+
+    h1 {
+      color: #2c3e50;
       font-size: 2.5rem;
+      margin: 0;
+    }
+
+    .btn-logout {
+      background: #e74c3c;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background 0.3s;
+    }
+
+    .btn-logout:hover {
+      background: #c0392b;
     }
 
     .add-project-form {
@@ -279,7 +304,8 @@ export class ProjectsComponent implements OnInit {
 
   constructor(
     private projectService: ProjectService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -340,5 +366,10 @@ export class ProjectsComponent implements OnInit {
 
   viewRooms(projectId: number): void {
     this.router.navigate(['/projects', projectId, 'rooms']);
+  }
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 }

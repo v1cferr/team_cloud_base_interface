@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Project } from './project';
+import { Project, CreateProjectRequest } from './project';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -10,20 +10,27 @@ export class ProjectService {
 
   private projectsUrl = 'http://localhost:8080/projects';
   private httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({ 
+      'Content-Type': 'application/json',
+      'Authorization': 'Basic ' + btoa('admin:admin123')
+    })
   };
 
   constructor(private httpClient: HttpClient) { }
 
   getProjects(): Observable<Project[]> {
-    return this.httpClient.get<Project[]>(this.projectsUrl)
+    return this.httpClient.get<Project[]>(this.projectsUrl, this.httpOptions)
+  }
+
+  getProjectById(id: number): Observable<Project> {
+    return this.httpClient.get<Project>(`${this.projectsUrl}/${id}`, this.httpOptions);
   }
 
   updateProject(project: Project): Observable<any> {
-    return this.httpClient.put(`${this.projectsUrl}/${project.id}`, project, this.httpOptions)
+    return this.httpClient.put(`${this.projectsUrl}/${project.id}`, { name: project.name }, this.httpOptions)
   }
 
-  insertProject(project: Project): Observable<any> {
+  insertProject(project: CreateProjectRequest): Observable<any> {
     return this.httpClient.post(this.projectsUrl, project, this.httpOptions);
   }
 

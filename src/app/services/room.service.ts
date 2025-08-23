@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Room, CreateRoomRequest } from '../models/room';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RoomService {
-  private apiUrl = 'http://localhost:8080/rooms';
+  private apiUrl = `${environment.apiUrl}/rooms`;
   private httpOptions = {
     headers: new HttpHeaders({ 
       'Content-Type': 'application/json',

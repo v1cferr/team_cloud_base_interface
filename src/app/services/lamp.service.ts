@@ -3,13 +3,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Lamp, CreateLampRequest } from '../models/lamp';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LampService {
-  private apiUrl = 'http://localhost:8080/lamps';
-  private wsUrl = 'ws://localhost:8080/ws';
+  private apiUrl = `${environment.apiUrl}/lamps`;
+  private wsUrl = environment.wsUrl;
   private socket: WebSocket | null = null;
   private lampUpdatesSubject = new Subject<Lamp[]>();
   

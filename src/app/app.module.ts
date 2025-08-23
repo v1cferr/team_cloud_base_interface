@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { RoomsComponent } from './rooms/rooms.component';
 import { LampsComponent } from './lamps/lamps.component';
+import { LoginComponent } from './login/login.component';
 
 import { FormsModule } from '@angular/forms';
 import { ProjectDetailComponent } from './project-detail/project-detail.component';
@@ -25,7 +26,8 @@ import { CommonModule } from '@angular/common';
     HttpClientModule,
     ProjectsComponent,
     RoomsComponent,
-    LampsComponent
+    LampsComponent,
+    LoginComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
